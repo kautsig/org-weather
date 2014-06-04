@@ -71,14 +71,18 @@
          (day (calendar-extract-day d))
          (current-time (encode-time 0 0 0 day month year))
          (cache-key (format-time-string "%F" current-time)))
+    (when (not org-weather-initialized)
+      (org-weather-refresh)
+      (setq org-weather-initialized t))
     (format "Weather: %s" (gethash cache-key org-weather-data))))
 
 (defun org-weather ()
   "Usable as sexp expression in the diary or an org file."
   (org-weather-string date))
 
-(org-weather-refresh)
-(eval-when-compile (require 'subr-x))
-(hash-table-keys org-weather-data)
+;; (org-weather-refresh)
+;; (eval-when-compile (require 'subr-x))
+;; (hash-table-keys org-weather-data)
+;; (setq org-weather-initialized nil)
 ;; (puthash "2014-06-01" "foobarbaz" org-weather-data)
 ;; (gethash "2014-06-01" org-weather-data)
