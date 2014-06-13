@@ -50,9 +50,9 @@
   (let* ((timestr (cdr (assoc 'dt item)))
          (cache-key (format-time-string "%F" (seconds-to-time timestr)))
          (weather (cdr (assoc 'weather item))))
-    (puthash cache-key (org-weather-description weather) org-weather-data)))
+    (puthash cache-key (org-weather-format weather) org-weather-data)))
 
-(defun org-weather-description (item)
+(defun org-weather-format (item)
   "Extracts the description from a 'weather' element"
   (cdr (assoc 'description (elt item 0))))
 
@@ -74,7 +74,11 @@
     (when (not org-weather-initialized)
       (org-weather-refresh)
       (setq org-weather-initialized t))
-    (format "Weather: %s" (gethash cache-key org-weather-data))))
+    (let ((org-weather-raw (gethash cache-key org-weather-data)))
+      ;; (format "Weather: %s" org-weather-raw)
+      (org-weather-raw)
+      ;; ("foo")
+      )))
 
 (defun org-weather ()
   "Usable as sexp expression in the diary or an org file."
