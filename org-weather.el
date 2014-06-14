@@ -32,6 +32,7 @@
 
 ;; Set this to your location
 (defvar org-weather-location "Graz,AT")
+(defvar org-weather-unit "°C")
 
 ;; Variables for internal use only
 (defvar org-weather-initialized nil)
@@ -49,12 +50,24 @@
   "Adds the one result 'list' item to the data cache"
   (let* ((timestr (cdr (assoc 'dt item)))
          (cache-key (format-time-string "%F" (seconds-to-time timestr)))
-         (weather (cdr (assoc 'weather item))))
-    (puthash cache-key (org-weather-format weather) org-weather-data)))
+         (weather (cdr (assoc 'weather item)))
+         (temperature (cdr (assoc 'temp item)))
+         (temp-min (number-to-string (org-weather-temp-min temperature)))
+         (temp-max (number-to-string (org-weather-temp-max temperature)))
+         (data (concat (org-weather-description weather) ", " temp-min org-weather-unit " - " temp-max org-weather-unit)))
+    (puthash cache-key data  org-weather-data)))
 
-(defun org-weather-format (item)
+(defun org-weather-description (weather)
   "Extracts the description from a 'weather' element"
-  (cdr (assoc 'description (elt item 0))))
+  (cdr (assoc 'description (elt weather 0))))
+
+(defun org-weather-temp-min (temperature)
+  "Extracts the min element from a 'temp' element"
+  (cdr (assoc 'min temperature)))
+
+(defun org-weather-temp-max (temperature)
+  "Extracts the max element from a 'temp' element"
+  (cdr (assoc 'max temperature)))
 
 (defun org-weather-refresh ()
   "Refreshes the weather data"
@@ -75,16 +88,15 @@
       (org-weather-refresh)
       (setq org-weather-initialized t))
     (let ((org-weather-raw (gethash cache-key org-weather-data)))
-      ;; (format "Weather: %s" org-weather-raw)
-      (org-weather-raw)
-      ;; ("foo")
-      )))
+      (when org-weather-raw
+        (format "Weather: %s" org-weather-raw)))))
 
 (defun org-weather ()
   "Usable as sexp expression in the diary or an org file."
   (org-weather-string date))
 
-;; (org-weather-refresh)
+(org-weather-refresh)
+
 ;; (eval-when-compile (require 'subr-x))
 ;; (hash-table-keys org-weather-data)
 ;; (setq org-weather-initialized nil)
