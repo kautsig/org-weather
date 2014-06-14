@@ -15,7 +15,6 @@ Add this to your .emacs file:
 : ;; Load the org-weather library
 : (add-to-list 'load-path "~/<path-to>/org-weather")
 : (require 'org-weather)
-:
 : ;; Set your location and refresh the data
 : (setq org-weather-location "London,UK")
 : (org-weather-refresh)
