@@ -1,3 +1,8 @@
+;;; org-weather.el --- Supports displaying the weather forecast from
+;;; openweathermap.org in your org-mode agenda.
+
+;; This is an example snippet as retrieved from openweathermap.org
+;;
 ;; {
 ;;   "list": [
 ;;     {
@@ -95,10 +100,11 @@
   "Usable as sexp expression in the diary or an org file."
   (org-weather-string date))
 
-(org-weather-refresh)
-
+;; (org-weather-refresh)
 ;; (eval-when-compile (require 'subr-x))
 ;; (hash-table-keys org-weather-data)
 ;; (setq org-weather-initialized nil)
 ;; (puthash "2014-06-01" "foobarbaz" org-weather-data)
 ;; (gethash "2014-06-01" org-weather-data)
+
+(provide 'org-weather)

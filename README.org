@@ -1,0 +1,36 @@
+* Overview
+org-weather is a small elisp script for displaying weather data from
+openweathermap.org in your org-mode agenda. I wrote this because the
+existing package is based on the google api which was discontinued:
+
+https://julien.danjou.info/projects/emacs-packages#google-weather
+
+* Installation
+Clone the repository using:
+
+: git clone http://github.com/kautsig/org-weather.git
+
+Add this to your .emacs file:
+
+: ;; Load the org-weather library
+: (add-to-list 'load-path "~/<path-to>/org-weather")
+: (require 'org-weather)
+:
+: ;; Set your location and refresh the data
+: (setq org-weather-location "London,UK")
+: (org-weather-refresh)
+
+Add this to one of your org files:
+
+: * Weather
+: %%(org-weather)
+
+When you view your agenda, you should now see the weather for today
+and the forecast for next week. You can refresh weather data by
+calling:
+
+: M-x org-weather-refresh
+
+* Disclaimer
+I'm not a lisp developer and of course you know how to do better. If
+so, pull requests are kindly appreciated.
