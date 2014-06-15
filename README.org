@@ -19,6 +19,12 @@ Add this to your .emacs file:
 : (setq org-weather-location "London,UK")
 : (org-weather-refresh)
 
+You can customize the string displayed in your agenda using this in
+your .emacs file. For available wildcards have a look at the source
+(it's simple).
+
+: (setq org-weather-format "Weather: %desc, %tmin-%tmax%tu, %p%pu, %h%hu, %s%su")
+
 Add this to one of your org files:
 
 : * Weather
