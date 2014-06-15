@@ -91,8 +91,8 @@
          (agenda-str org-weather-format)
 
          (agenda-str (org-weather-replace "%main" main agenda-str))
-         (agenda-str (org-weather-replace "%desc" main agenda-str))
-         (agenda-str (org-weather-replace "%icon" main agenda-str))
+         (agenda-str (org-weather-replace "%desc" desc agenda-str))
+         (agenda-str (org-weather-replace "%icon" icon agenda-str))
 
          (agenda-str (org-weather-replace "%tu" org-weather-temperature-unit agenda-str))
          (agenda-str (org-weather-replace "%tmin" tmin agenda-str))
