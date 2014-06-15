@@ -43,6 +43,7 @@
 
 ;; The api url, no need to change ususally
 (defvar org-weather-api-url "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&mode=json&units=metric&cnt=7")
+(defvar org-weather-api-timeout 2)
 
 ;; The units, just for displaying
 (defvar org-weather-temperature-unit "°C")
@@ -57,10 +58,11 @@
 
 (defun org-weather-load ()
   "Loads the webserivce data and returns it as a JSON object."
-  (with-temp-buffer
-    (url-insert-file-contents
-     (format org-weather-api-url org-weather-location))
-    (json-read)))
+  (with-timeout (org-weather-api-timeout)
+      (with-temp-buffer
+        (url-insert-file-contents
+         (format org-weather-api-url org-weather-location))
+        (json-read))))
 
 (defun org-weather-add-to-cache (item)
   "Adds the one result 'list' item to the data cache"
