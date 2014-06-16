@@ -36,6 +36,19 @@ calling:
 
 : M-x org-weather-refresh
 
+* Data License
+
+According to http://openweathermap.org/price:
+
+#+BEGIN_QUOTE
+All data provided by OpenWeatherMap are distributed under terms of the
+Creative Commons license
+http://creativecommons.org/licenses/by-sa/2.0/.
+#+END_QUOTE
+
+To apply with the license the name "OpenWeatherMap" was added to the
+string displayed in your agenda.
+
 * Disclaimer
 I'm not a lisp developer and of course you know how to do better. If
 so, pull requests are kindly appreciated.

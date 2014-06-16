@@ -39,7 +39,8 @@
 (defvar org-weather-location "Graz,AT")
 
 ;; Define the format string to display in the agenda, see below for available wildcards
-(defvar org-weather-format "Weather: %desc, %tmin-%tmax%tu, %p%pu, %h%hu, %s%su")
+;; Data is licensed under cc by-sa, so we must display the "OpenWeatherMap" name
+(defvar org-weather-format "OpenWeatherMap: %desc, %tmin-%tmax%tu, %p%pu, %h%hu, %s%su")
 
 ;; The api url, no need to change ususally
 (defvar org-weather-api-url "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&mode=json&units=metric&cnt=7")
