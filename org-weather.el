@@ -39,11 +39,14 @@
 (defvar org-weather-location "Graz,AT")
 
 ;; Define the format string to display in the agenda, see below for available wildcards
-;; Data is licensed under cc by-sa, so we must display the "OpenWeatherMap" name
-(defvar org-weather-format "OpenWeatherMap: %desc, %tmin-%tmax%tu, %p%pu, %h%hu, %s%su")
+(defvar org-weather-format "Weather: %desc, %tmin-%tmax%tu, %p%pu, %h%hu, %s%su")
+
+;; Your openweather API key.
+(defvar org-weather-api-key  "")
 
 ;; The api url, no need to change ususally
-(defvar org-weather-api-url "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&mode=json&units=metric&cnt=7")
+(defvar org-weather-api-url "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&mode=json&units=metric&cnt=7&&APPID=%s")
+
 (defvar org-weather-api-timeout 2)
 
 ;; The units, just for displaying
@@ -62,7 +65,7 @@
   (with-timeout (org-weather-api-timeout)
       (with-temp-buffer
         (url-insert-file-contents
-         (format org-weather-api-url org-weather-location))
+        (format org-weather-api-url org-weather-location org-weather-api-key))
         (json-read))))
 
 (defun org-weather-add-to-cache (item)
