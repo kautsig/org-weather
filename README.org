@@ -36,6 +36,13 @@ calling:
 
 : M-x org-weather-refresh
 
+** openweather API Key.
+The [[http://openweathermap.org/api][openweather]]  site now requires you to sign up for an API key. You
+can choose a free key or various paid options. You need to add the API
+key to your .emacs:
+
+: (setq org-weather-api-key  "YourAPIKey")
+
 * Data License
 
 According to http://openweathermap.org/price:
