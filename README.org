@@ -36,6 +36,12 @@ calling:
 
 : M-x org-weather-refresh
 
+If you want to show fahrenheit instead of celsius, you can add these 2
+lines to your emacs configuration:
+
+: (setq org-weather-api-url "http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&mode=json&units=imperial&cnt=7&APPID=%s")
+: (setq org-weather-temperature-unit "°F")
+
 ** openweather API Key.
 The [[http://openweathermap.org/api][openweather]]  site now requires you to sign up for an API key. You
 can choose a free key or various paid options. You need to add the API
